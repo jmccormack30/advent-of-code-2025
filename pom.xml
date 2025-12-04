@@ -5,7 +5,7 @@
   <artifactId>adventofcode2025</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>temp</name>
+  <name>adventofcode2025</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -14,5 +14,18 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.18.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+      <version>4.4</version>
+    </dependency>
+
   </dependencies>
 </project>
