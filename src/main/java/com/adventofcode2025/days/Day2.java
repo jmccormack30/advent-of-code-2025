@@ -1,7 +1,6 @@
-package com.adventofcode2025.Day2;
+package com.adventofcode2025.days;
 
 import com.adventofcode2025.util.TextParser;
-import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 public class Day2 {
 
     public static String processPart1() {
-        List<String> ranges = getRanges();
+        List<String> ranges = TextParser.getRanges("day2_input.txt");
 
         long sum = 0;
 
@@ -36,7 +35,7 @@ public class Day2 {
     }
 
     public static String processPart2() {
-        List<String> ranges = getRanges();
+        List<String> ranges = TextParser.getRanges("day2_input.txt");
 
         long sum = 0;
 
@@ -89,15 +88,5 @@ public class Day2 {
         }
 
         return factors;
-    }
-
-    private static List<String> getRanges() {
-        List<String> ranges = TextParser.parseCommaSeparatedLine("day2_input.txt");
-
-        if (CollectionUtils.isEmpty(ranges)) {
-            throw new RuntimeException("Input is empty!");
-        }
-
-        return ranges;
     }
 }

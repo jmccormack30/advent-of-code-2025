@@ -1,7 +1,6 @@
-package com.adventofcode2025.Day3;
+package com.adventofcode2025.days;
 
 import com.adventofcode2025.util.TextParser;
-import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -14,7 +13,7 @@ import java.util.TreeMap;
 public class Day3 {
 
     public static String processPart1() {
-        List<String> lines = getLines();
+        List<String> lines = TextParser.getLines("day3_input.txt");
 
         long sum = 0;
 
@@ -51,7 +50,7 @@ public class Day3 {
     }
 
     public static String processPart2() {
-        List<String> lines = getLines();
+        List<String> lines = TextParser.getLines("day3_input.txt");
 
         long sum = 0;
         final int BATTERY_LENGTH = 12;
@@ -120,16 +119,6 @@ public class Day3 {
         }
 
         return bank;
-    }
-
-    private static List<String> getLines() {
-        List<String> lines = TextParser.parseInput("day3_input.txt");
-
-        if (CollectionUtils.isEmpty(lines)) {
-            throw new RuntimeException("Input is empty!");
-        }
-
-        return lines;
     }
 
     private record DigitAndIndex(int digit, int index) {}

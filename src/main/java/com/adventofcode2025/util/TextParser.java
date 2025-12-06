@@ -1,5 +1,6 @@
 package com.adventofcode2025.util;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.BufferedReader;
@@ -12,33 +13,52 @@ import java.util.List;
 
 public class TextParser {
 
-    public static List<String> parseCommaSeparatedLine(String fileName) {
-        try {
-            InputStream resourceStream = TextParser.class.getResourceAsStream("/" + fileName);
-            if (resourceStream != null) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(resourceStream, StandardCharsets.UTF_8));
-                String line = br.readLine();
+    public static List<String> getRanges(String fileName) {
+        List<String> ranges = TextParser.parseCommaSeparatedLine(fileName);
 
-                if (line != null && br.readLine() == null) {
-                    return new ArrayList<>(Arrays.asList(line.split(",")));
-                }
-                else {
-                    System.err.println("Not a single line file.");
-                    return null;
-                }
-            }
-            else {
-                System.err.println("Resource not found: " + fileName);
-                return null;
-            }
+        if (CollectionUtils.isEmpty(ranges)) {
+            throw new RuntimeException("Input is empty!");
         }
-        catch (Exception e) {
-            System.err.println("Failed to load file: " + fileName);
-            return null;
-        }
+
+        return ranges;
     }
 
-    public static List<String> parseInput(String fileName) {
+    public static List<String> getLines(String fileName) {
+        List<String> lines = TextParser.parseInput(fileName);
+
+        if (CollectionUtils.isEmpty(lines)) {
+            throw new RuntimeException("Input is empty!");
+        }
+
+        return lines;
+    }
+
+    public static Character[][] getCharArray(String fileName) {
+        List<String> lines = TextParser.parseInput(fileName);
+
+        if (CollectionUtils.isEmpty(lines)) {
+            throw new RuntimeException("Input is empty!");
+        }
+
+        int numRows = lines.size();
+        int numCols = lines.getFirst().length();
+
+        Character[][] arr = new Character[numRows][numCols];
+
+        for (int row = 0; row < numRows; row++) {
+            String line = lines.get(row);
+
+            Character[] charArr = line.chars()
+                    .mapToObj(c -> (char) c)
+                    .toArray(Character[]::new);
+
+            arr[row] = charArr;
+        }
+
+        return arr;
+    }
+
+    private static List<String> parseInput(String fileName) {
         try {
             InputStream resourceStream = TextParser.class.getResourceAsStream("/" + fileName);
             if (resourceStream != null) {
@@ -72,5 +92,31 @@ public class TextParser {
         }
 
         return lines;
+    }
+
+    private static List<String> parseCommaSeparatedLine(String fileName) {
+        try {
+            InputStream resourceStream = TextParser.class.getResourceAsStream("/" + fileName);
+            if (resourceStream != null) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(resourceStream, StandardCharsets.UTF_8));
+                String line = br.readLine();
+
+                if (line != null && br.readLine() == null) {
+                    return new ArrayList<>(Arrays.asList(line.split(",")));
+                }
+                else {
+                    System.err.println("Not a single line file.");
+                    return null;
+                }
+            }
+            else {
+                System.err.println("Resource not found: " + fileName);
+                return null;
+            }
+        }
+        catch (Exception e) {
+            System.err.println("Failed to load file: " + fileName);
+            return null;
+        }
     }
 }

@@ -1,14 +1,13 @@
-package com.adventofcode2025.Day1;
+package com.adventofcode2025.days;
 
 import com.adventofcode2025.util.TextParser;
-import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.List;
 
 public class Day1 {
 
     public static String processPart1() {
-        List<String> lines = getLines();
+        List<String> lines = TextParser.getLines("day1_input.txt");
 
         int dialNumber = 50;
         int timesAtZero = 0;
@@ -41,7 +40,7 @@ public class Day1 {
     }
 
     public static String processPart2() {
-        List<String> lines = getLines();
+        List<String> lines = TextParser.getLines("day1_input.txt");
 
         int dialNumber = 50;
         int timesPassingZero = 0;
@@ -79,15 +78,5 @@ public class Day1 {
         }
 
         return String.valueOf(timesPassingZero);
-    }
-
-    private static List<String> getLines() {
-        List<String> lines = TextParser.parseInput("day1_input.txt");
-
-        if (CollectionUtils.isEmpty(lines)) {
-            throw new RuntimeException("Input text lines are empty!");
-        }
-
-        return lines;
     }
 }
