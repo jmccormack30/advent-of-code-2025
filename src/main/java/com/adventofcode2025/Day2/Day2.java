@@ -48,26 +48,46 @@ public class Day2 {
             for (long id = start; id <= end; id++) {
                 String idStr = String.valueOf(id);
 
-                Set<Character> set = new HashSet<>();
-                boolean isInvalid = false;
+                List<Integer> factors = getFactors(idStr.length());
+                boolean isInvalid;
 
-                for (char c : idStr.toCharArray()) {
-                    if (set.contains(c)) {
-                        isInvalid = true;
+                for (int factor : factors) {
+                    String pattern = null;
+                    isInvalid = true;
+
+                    for (int i = 0; i <= idStr.length() - factor; i += factor) {
+                        String substring = idStr.substring(i, i + factor);
+
+                        if (pattern == null) {
+                            pattern = substring;
+                        }
+                        else if (!pattern.equals(substring)) {
+                            isInvalid = false;
+                            break;
+                        }
+                    }
+
+                    if (isInvalid) {
+                        sum += id;
                         break;
                     }
-                    else {
-                        set.add(c);
-                    }
-                }
-
-                if (isInvalid) {
-                    sum += id;
                 }
             }
         }
 
         return String.valueOf(sum);
+    }
+
+    private static List<Integer> getFactors(int number) {
+        List<Integer> factors = new ArrayList<>();
+
+        for (int i = 1; i <= number / 2; i++) {
+            if (number % i == 0) {
+                factors.add(i);
+            }
+        }
+
+        return factors;
     }
 
     private static List<String> getRanges() {
