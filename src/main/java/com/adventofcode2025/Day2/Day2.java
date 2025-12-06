@@ -3,7 +3,8 @@ package com.adventofcode2025.Day2;
 import com.adventofcode2025.util.TextParser;
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Day2 {
 
