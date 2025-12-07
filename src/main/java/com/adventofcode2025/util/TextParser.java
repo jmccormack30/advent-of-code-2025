@@ -33,6 +33,16 @@ public class TextParser {
         return lines;
     }
 
+    public static List<String> getLinesNoTrim(String fileName) {
+        List<String> lines = TextParser.parseInputNoTrim(fileName);
+
+        if (CollectionUtils.isEmpty(lines)) {
+            throw new RuntimeException("Input is empty!");
+        }
+
+        return lines;
+    }
+
     public static Character[][] getCharArray(String fileName) {
         List<String> lines = TextParser.parseInput(fileName);
 
@@ -76,6 +86,24 @@ public class TextParser {
         }
     }
 
+    private static List<String> parseInputNoTrim(String fileName) {
+        try {
+            InputStream resourceStream = TextParser.class.getResourceAsStream("/" + fileName);
+            if (resourceStream != null) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(resourceStream, StandardCharsets.UTF_8));
+                return getLinesNoTrim(br);
+            }
+            else {
+                System.err.println("Resource not found: " + fileName);
+                return null;
+            }
+        }
+        catch (Exception e) {
+            System.err.println("Failed to load file: " + fileName);
+            return null;
+        }
+    }
+
     private static List<String> getLines(BufferedReader br) throws Exception {
         List<String> lines = new ArrayList<>();
 
@@ -84,6 +112,22 @@ public class TextParser {
         while ((line = br.readLine()) != null) {
             line = line.trim();
 
+            if (StringUtils.isEmpty(line)) {
+                continue;
+            }
+
+            lines.add(line);
+        }
+
+        return lines;
+    }
+
+    private static List<String> getLinesNoTrim(BufferedReader br) throws Exception {
+        List<String> lines = new ArrayList<>();
+
+        String line;
+
+        while ((line = br.readLine()) != null) {
             if (StringUtils.isEmpty(line)) {
                 continue;
             }

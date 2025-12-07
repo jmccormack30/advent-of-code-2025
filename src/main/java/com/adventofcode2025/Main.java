@@ -4,14 +4,15 @@ import com.adventofcode2025.days.Day1;
 import com.adventofcode2025.days.Day2;
 import com.adventofcode2025.days.Day3;
 import com.adventofcode2025.days.Day4;
-
 import com.adventofcode2025.days.Day5;
+import com.adventofcode2025.days.Day6;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 public class Main {
     public static void main(String[] args) {
-        process(Day.DAY5);
+        process(Day.DAY6);
     }
 
     public static void process(Day day) {
@@ -39,6 +40,10 @@ public class Main {
                 part1Solution = Day5.processPart1();
                 part2Solution = Day5.processPart2();
             }
+            case DAY6 -> {
+                part1Solution = Day6.processPart1();
+                part2Solution = Day6.processPart2();
+            }
             default -> throw new IllegalStateException("Unexpected day: " + day);
         }
 
@@ -53,7 +58,8 @@ public class Main {
         DAY2("Day 2"),
         DAY3("Day 3"),
         DAY4("Day 4"),
-        DAY5("Day 5");
+        DAY5("Day 5"),
+        DAY6("Day 6");
 
         private final String label;
     }
